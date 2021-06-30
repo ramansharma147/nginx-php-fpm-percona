@@ -15,6 +15,18 @@ services:
         volumes:
             - ./www:/www
             - ./default.conf:/etc/nginx/conf.d/default.conf
+     nginx:
+        image: nginx:alpine
+        container_name: nginx
+        env_file:
+            - ".env"
+        networks:
+            - frontend
+        ports:
+            - "8080:80"
+        volumes:
+            - ./www:/www
+            - ./default.conf:/etc/nginx/conf.d/default.conf
     php-fpm:
         #image: fpm-alpine-mysqli # uncomment this line and comment following build and image to get offical image
         build: . # install extensions via docker-php-ext-install mysqli
